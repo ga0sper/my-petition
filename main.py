@@ -1,101 +1,63 @@
 import streamlit as st
-import pandas as pd
-import os
 
 # إعداد الصفحة
-st.set_page_config(page_title="عريضة الجماهير", page_icon="🚨", layout="centered")
+st.set_page_config(page_title="بورصة الدخان", page_icon="💸", layout="centered")
 
-# ==========================================
-# 🎨 كود التصميم (CSS) باش يولي عصري
-# ==========================================
+# تصميم السيت (CSS) باش يبان غالي
 st.markdown("""
 <style>
-    .big-title {
+    .luxury-title {
         text-align: center;
-        color: #ff4b4b; /* لون أحمر */
-        font-size: 45px;
-        font-weight: 900;
-        margin-bottom: 5px;
+        color: #d4af37; /* لون ذهبي */
+        font-size: 40px;
+        font-weight: bold;
+        margin-bottom: 10px;
     }
-    .sub-text {
+    .price-tag {
+        color: #ff4b4b;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .fake-alert {
         text-align: center;
-        color: #cfd4df;
-        font-size: 20px;
-        margin-bottom: 25px;
-    }
-    .image-box {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 30px;
-    }
-    .image-box img {
-        border-radius: 15px; /* حواف دائرية */
-        box-shadow: 0px 4px 20px rgba(255, 75, 75, 0.4); /* ظل أحمر للتصويرة */
-        max-width: 100%;
-        height: auto;
+        color: gray;
+        font-size: 14px;
+        margin-top: 50px;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# ==========================================
-# 🛑 هنا حط الرابط تاع التصويرة اللي تحبها 🛑
-# ==========================================
-# روح لجوجل، حوس على تصويرة، دير كليك دروا ومبعد Copy Image Address
-# وحط الرابط داخل المزدوجتين هنا:
-IMAGE_URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCHq7vixadUget9DyVwDug2dBPMlqiNTh7tSBICyA218bvoDofvcn_6Krk&s=10"
-
-if IMAGE_URL:
-    st.markdown(f'<div class="image-box"><img src="{IMAGE_URL}" width="500"></div>', unsafe_allow_html=True)
-
-# ==========================================
-# 🛑 هنا بدل الكتيبة تاعك 🛑
-# ==========================================
-st.markdown('<div class="big-title">عريضة للمطالبة بنفي رامز زروقي ـ .........</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-text">نحن الجماهير الممضية أسفله، نطالب بـ نفي زروقي من الجزائر  .........</div>', unsafe_allow_html=True)
+# العنوان الرئيسي
+st.markdown('<div class="luxury-title">🚬 البورصة الوطنية للتبغ</div>', unsafe_allow_html=True)
+st.write("### أول منصة جزائرية لبيع الدخان بالتقسيط المريح وبدون فوائد (ربوية) 📉")
 st.markdown("---")
 
-# ملف تخزين التوقيعات
-DATA_FILE = "signatures.csv"
+# عرض "المنتجات" الفاخرة
+col1, col2 = st.columns(2)
 
-def load_signatures():
-    if os.path.exists(DATA_FILE):
-        return pd.read_csv(DATA_FILE)
-    return pd.DataFrame(columns=["الاسم"])
+with col1:
+    st.markdown("### 🥇 مارلبورو (Marlboro)")
+    st.write("حبة وحدة، مستعملة جبدة برك، نقية ومافيهاش ريحة الشياط.")
+    st.markdown('<p class="price-tag">السعر: 15,000 دج (أو غرام ذهب)</p>', unsafe_allow_html=True)
+    buy_marlboro = st.button("🛒 تقديم طلب قرض لشرائها")
+    if buy_marlboro:
+        st.error("❌ تم رفض الطلب: الراتب تاعك ما يكفيش باش تشري حبة مارلبورو. روح اشري الخبز لداركم خير!")
 
-def save_signature(name):
-    df = load_signatures()
-    new_row = pd.DataFrame({"الاسم": [name]})
-    df = pd.concat([df, new_row], ignore_index=True)
-    df.to_csv(DATA_FILE, index=False)
+with col2:
+    st.markdown("### 🥉 ريم (Rym)")
+    st.write("نص ڨارو، مخبي في باكي تاع ماكاو باش ما يفيقوش بيه.")
+    st.markdown('<p class="price-tag">السعر: 5,000 دج (بالتقسيط على 3 أشهر)</p>', unsafe_allow_html=True)
+    buy_rym = st.button("🛒 اشتري الآن (بالتقسيط)")
+    if buy_rym:
+        st.warning("⚠️ لازم تجيب كفيل (ضامن) وشهادة عمل باش نبيعولك نص ڨارو ريم.")
 
-# إعدادات العداد
-df = load_signatures()
-current_signatures = len(df)
-target = 5000000 
+st.markdown("---")
 
-# عرض العداد
-st.markdown(f"<h3 style='text-align: center;'>🔥 التوقيعات الحالية: {current_signatures} من {target}</h3>", unsafe_allow_html=True)
-progress = min(current_signatures / target, 1.0)
-st.progress(progress)
+# قسم الاستثمار
+st.subheader("📈 استثمر في 'الڨارو-كوين'")
+st.write("الأسعار راهي طالعة كثر من البيتكوين! اشري كارطوشة اليوم، وبيعها العام الجاي تشري بيها سكنة عدل.")
+st.progress(85)
+st.caption("مؤشر ارتفاع أسعار الدخان في السوق السوداء")
 
-# فورم التوقيع
-with st.form("signature_form"):
-    st.write("### ✍️ انضم للحملة ووقع الآن")
-    name = st.text_input("الاسم واللقب:")
-    submitted = st.form_submit_button("أنا أوقع وأدعم العريضة ✊", type="primary")
-
-    if submitted:
-        if name.strip():
-            save_signature(name)
-            st.success("تم تسجيل التوقيع! بارطاجي العريضة.")
-            st.rerun()
-        else:
-            st.error("لازم تكتب اسمك باش يحسبك السيستام!")
-
-# عرض آخر الموقعين
-if current_signatures > 0:
-    st.markdown("---")
-    with st.expander("👀 شوف آخر من وقعوا"):
-        st.dataframe(df.tail(10).iloc[::-1], use_container_width=True)
-
-st.markdown("<br><hr><p style='text-align: center; color: gray; font-size: 12px;'>Developed by GASPER</p>", unsafe_allow_html=True)
+# التوثيق
+st.markdown('<div class="fake-alert">⚠️ هذي المنصة مجرد مزحة (Troll) بمناسبة الزيادة في الأسعار. التدخين مضر بالصحة والجيب! <br> Developed by GASPER</div>', unsafe_allow_html=True)
